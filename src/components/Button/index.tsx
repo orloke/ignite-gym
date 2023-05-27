@@ -2,21 +2,28 @@ import { Button as NativeBaseButton, IButtonProps, Text } from 'native-base'
 
 interface ButtonProps extends IButtonProps {
   title: string
+  variant?: 'solid' | 'outline'
 }
 
-export function Button({ title, ...rest }: ButtonProps) {
+export function Button({ title, variant = 'solid', ...rest }: ButtonProps) {
   return (
     <NativeBaseButton
       w="full"
       h={14}
-      bg="green.700"
+      bg={variant === 'outline' ? 'transparent' : 'green.700'}
+      borderWidth={1}
+      borderColor="green.700"
       rounded="sm"
       _pressed={{
-        bg: 'green.500',
+        bg: variant === 'outline' ? 'gray.500' : 'green.500',
       }}
       {...rest}
     >
-      <Text color="white" fontFamily="heading" fontSize="sm">
+      <Text
+        color={variant === 'outline' ? 'green.500' : 'white'}
+        fontFamily="heading"
+        fontSize="sm"
+      >
         {title}
       </Text>
     </NativeBaseButton>
